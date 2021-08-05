@@ -61,10 +61,7 @@ h2{
 }
 #instructions{
     position: absolute;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     overflow: auto;
     top: 10%; left: 0; bottom: 0; right: 0;
     width: 60%;

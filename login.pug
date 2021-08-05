@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    meta(charset='uft-8')
+    title DELTA LOGIN
+    link(rel='stylesheet' href='css/login.css')
+    style.
+      @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+  body
+    #heading
+      h1 DELTA
+      button#home(type='button' onclick="location.href='/'") HOME
+    #loginform
+      h2 LOGIN
+      form#login(method='POST')
+        label(for='username') ENTER USERNAME:
+        br
+        input#username(type='text' name='username')
+        br
+        label(for='password') ENTER PASSWORD:
+        br
+        input#password(type='password' name='password')
+        br
+        br
+        button#submit(type='submit') LOGIN
+        br
+        br

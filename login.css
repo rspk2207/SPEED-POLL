@@ -76,5 +76,11 @@ input{
     font-weight: bolder;
     font-size: large;
     text-align: center;
-    margin-left: 290px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+#submit:hover{
+    background-color: rgb(155, 151, 151);
+    transition: 0.5s;
 }

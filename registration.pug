@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    meta(charset='uft-8')
+    title DELTA REGISTRATION
+    link(rel='stylesheet' href='css/registration.css')
+    style.
+      @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+  body
+    #heading
+      h1 DELTA
+      button#home(onclick='location.href="/"') HOME
+    #registration
+      h2 REGISTRATION FORM
+      form#register(method='POST')
+        label(for='name') ENTER NAME:
+        br
+        input#name(type='text' name='name')
+        br
+        label(for='username') ENTER USERNAME:
+        br
+        input#username(type='text' name='username')
+        br
+        label(for='dob') ENTER DATE OF BIRTH:
+        br
+        input#dob(type='date' name='dob')
+        br
+        label(for='phno') ENTER PHONE NUMBER:
+        br
+        input#phno(type='number' name='phno')
+        br
+        label(for='mail') ENTER EMAIL OR GMAIL:
+        br
+        input#mail(type='text' name='mail')
+        br
+        label(for='password') ENTER PASSWORD:
+        br
+        input#password(type='password' name='password')
+        br
+        br
+        button#submit(type='submit') REGISTER
+        br
+        br
