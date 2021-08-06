@@ -3,35 +3,37 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./user');
 
-module.exports = function(passport)
+module.exports = async function(passport)
 {
-    passport.use(new localStrategy({usernameField: 'username'},(lusername,lpassword,done)=>{
-        User.findOne({username: rusername})
-        .then(user =>{
+    passport.use(new localStrategy({usernameField: 'username'},async (lusername,lpassword,done)=>{
+        await User.findOne({username: lusername})
+        .then(async (user) =>{
             if(!user)
             return done(null, false,{message: 'username not registered'});
 
-            bcrypt.compare(lpassword,user.rpassword,(err, match) =>{
-                if(err) throw err;
+            bcrypt.compare(lpassword, user.password, (err, match) => {
+                if (err)
+                    console.log(lpassword);
+                    console.log(user.password);
+                    console.log(err);
 
-                if(match)
-                {
+                if (match) {
                     return done(null, user);
                 }
-                else
-                {
-                    return done(null, false, {message:'incorrect password'});
+
+                else {
+                    return done(null, false, { message: 'incorrect password' });
                 }
             });
         })
         .catch(err=>console.log(err));
     }));
     
-    passport.serializeUser((user,done)=>{
-        done(null, user,id);
+    await passport.serializeUser((user,done)=>{
+        done(null, user.id);
     });
 
-    passport.deserializeUser((id,done)=>{
+    await passport.deserializeUser((id,done)=>{
         User.findById(id,(err,user)=>{
             done(err,user);
         });

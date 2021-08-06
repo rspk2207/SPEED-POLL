@@ -43,7 +43,7 @@ app.get('/registration',(req,res) =>{
 app.get('/login',(req,res) =>{
     res.render('login');
 });
-app.post('/registration',(req,res) =>{
+app.post('/registration',async (req,res) =>{
     let errors = [];
     let rname= req.body.name; 
     let rusername= req.body.username;
@@ -61,42 +61,46 @@ app.post('/registration',(req,res) =>{
     }
     else
     {
-        User.findOne({username: rusername})
-            .then(user=>{
+        await User.findOne({username: rusername})
+            .then( async (user)=>{
             if(user)
             res.render('registration',errors,rname,rusername,rdob,rphno,rmail,rpassword);
             else
             {
-                const newUser = new User({
-                    rname,
-                    rusername,
-                    rdob,
-                    rphno,
-                    rmail,
-                    rpassword
+                let newUser = new User({
+                    name: rname,
+                    username: rusername,
+                    dob: rdob,
+                    phno: rphno,
+                    mail: rmail,
+                    password: rpassword
                 });
 
-                bcrypt.genSalt(10,(err,salt)=>{
-                    bcrypt.hash(newUser.rpassword, salt, (err,hash)=>{
-                        if(err) throw err;
-
-                        newUser.rpassword = hash;
-                        newUser.save()
-                        .then(user =>
-                            {
+                await bcrypt.genSalt(10, async (err,salt)=>{
+                    bcrypt.hash(newUser.password, salt, async (err, hash) => {
+                        if (err){
+                        console.log(newUser.password);
+                        console.log(salt);
+                        console.log(err);
+                        }
+                        else{
+                        newUser.password = hash;
+                        await newUser.save()
+                            .then(async (user) => {
                                 res.redirect('/login');
                             })
-                        .catch(err=> console.log(err))
-                    })
+                            .catch(err => console.log(err));
+                    }})
                 })
             }
         })
+        .catch(err=>console.log(err));
     }
 });
-app.post('/login',(req,res,next) =>{
-    passport.authenticate("local", {
-        successRedirect: '/homepage',
-        failureRedirect: '/login'
+app.post('/login', async (req,res,next) =>{
+    await passport.authenticate("local", {
+          successRedirect: '/homepage',
+          failureRedirect: '/login'
     })(req,res,next);
 });
 
