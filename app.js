@@ -115,6 +115,18 @@ function loggedIn(req, res, next) {
 app.get('/homepage',loggedIn,(req,res)=>{
    res.render('homepage',{user: req.user});
 });
+app.get('/teamcr',(req,res)=>{
+    res.render('teamcr',{user: req.user});
+});
+app.post('/homepage',(req,res)=>{
+    console.log(req.body.teamname);
+});
+app.get('/teams',loggedIn,(req,res)=>{
+    res.render('teams',{user: req.user});
+});
+app.get('/about',loggedIn,(req,res)=>{
+    res.render('about',{user: req.user});
+});
 app.listen(3000, () => {
     console.log('started on port 3000');
 });

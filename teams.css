@@ -1,0 +1,57 @@
+body{
+    background-color: rgb(231, 226, 226);
+    /*
+    background-image: url('../imgs/regis.gif');
+    background-size: cover;
+    */
+    margin:0;
+    font-family: 'Oswald', sans-serif;
+}
+#heading{
+    padding-left: 5px;
+    width: 99%;
+    height: 60px;
+    background-color:rgb(4, 114, 4);
+    color: black;
+    border: 5px solid black;
+    box-shadow:0 0 5px 5px rgb(92, 91, 91);
+    text-shadow: 1px 1px 3px white;
+    font-family: 'Palette Mosaic', cursive;
+}
+h1{
+    margin-top: 5px;
+}
+#logout{
+    position: relative;
+    margin-top: -67px;
+    float: right;
+    width: 100px;
+    height: 50px;
+    margin-right: 10px;
+    border: 5px solid black;
+    color: black;
+    font-weight: bold;
+    font-family: 'Palette Mosaic', cursive;
+    cursor: pointer;
+}
+#logout:hover{
+    background-color: rgb(155, 151, 151);
+    transition: 0.5s;
+}
+#dashboard{
+    position: relative;
+    margin-top: -67px;
+    float: right;
+    width: 100px;
+    height: 50px;
+    margin-right: 130px;
+    border: 5px solid black;
+    color: black;
+    font-weight: bold;
+    font-family: 'Palette Mosaic', cursive;
+    cursor: pointer;
+}
+#dashboard:hover{
+    background-color: rgb(155, 151, 151);
+    transition: 0.5s;
+}

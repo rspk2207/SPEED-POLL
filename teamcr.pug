@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta(charset='uft-8')
+    title DELTA HOME
+    link(rel='stylesheet' href='css/teamcr.css')
+    style.
+      @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+  body
+    #heading
+      h1 DELTA
+      button#dashboard DASHBOARD
+      button#logout(onclick="location.href='/logout'") LOG OUT
+      #create
+        h2 CREATE A NEW TEAM
+        form#teamcr(method='POST' action='/homepage')
+            label(for="teamname") ENTER TEAM NAME:
+            br
+            input#teamname(type="text" placeholder='Team name' name='teamname') 
+            br
+            br
+            button#make(type='submit') CREATE TEAM
+            br
+            br

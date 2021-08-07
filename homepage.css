@@ -5,6 +5,7 @@ body{
     background-size: cover;
     */
     margin:0;
+    font-family: 'Oswald', sans-serif;
 }
 #heading{
     padding-left: 5px;
@@ -53,4 +54,65 @@ h1{
 #dashboard:hover{
     background-color: rgb(155, 151, 151);
     transition: 0.5s;
+}
+h2{
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+    font-weight:900;
+    text-shadow: 1px 1px rgb(4, 114, 4);
+}
+#teamcr{
+    text-align: center;
+    font-size: large;
+    position: relative;
+    width: 20%;
+    height: 200px;
+    margin: auto;
+    margin-top: 50px;
+    margin-left: 10%;
+    background-color: rgb(4, 114, 4);
+    border: 5px solid black;
+    box-shadow: 0 0 5px 5px rgb(92, 91, 91);
+    cursor: pointer;
+}
+#teams{
+    text-align: center;
+    font-size: large;
+    position: relative;
+    width: 20%;
+    height: 200px;
+    margin-top: -208px;
+    margin: auto;
+    margin-left: 10%;
+    background-color: rgb(4, 114, 4);
+    border: 5px solid black;
+    box-shadow: 0 0 5px 5px rgb(92, 91, 91);
+    cursor: pointer;
+}
+#about{
+    text-align: center;
+    font-size: large;
+    position: relative;
+    width: 20%;
+    height: 200px;
+    margin: auto;
+    margin-left: 10%;
+    margin-top: -208px;
+    background-color: rgb(4, 114, 4);
+    border: 5px solid black;
+    box-shadow: 0 0 5px 5px rgb(92, 91, 91);
+    cursor: pointer;
+}
+#teams:hover{
+    transition: 0.5s;
+    background-color: rgb(10, 163, 10);
+}
+#teamcr:hover{
+    transition: 0.5s;
+    background-color: rgb(10, 163, 10);
+}
+#about:hover{
+    transition: 0.5s;
+    background-color: rgb(10, 163, 10);
 }

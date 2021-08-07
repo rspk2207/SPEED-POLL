@@ -12,4 +12,7 @@ html
       h1 DELTA
       button#dashboard DASHBOARD
       button#logout(onclick="location.href='/logout'") LOG OUT
-    p hello mr  #{user.name}
+    h2 WELCOME #{(user.name).toUpperCase()}!!
+    button#teamcr(onclick="location.href='/teamcr'") CREATE A TEAM
+    button#teams(onclick="location.href='/teams'") YOUR TEAMS
+    button#about(onclick="location.href='/about'") ABOUT THE SERVICE
