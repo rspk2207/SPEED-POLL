@@ -33,6 +33,7 @@ h1{
     font-weight: bold;
     font-family: 'Palette Mosaic', cursive;
     cursor: pointer;
+    transition: 0.5s;
 }
 #logout:hover{
     background-color: rgb(155, 151, 151);
@@ -50,6 +51,7 @@ h1{
     font-weight: bold;
     font-family: 'Palette Mosaic', cursive;
     cursor: pointer;
+    transition: 0.5s;
 }
 #dashboard:hover{
     background-color: rgb(155, 151, 151);
@@ -58,9 +60,16 @@ h1{
 h2{
     text-align: center;
     position: relative;
-    margin-top: 30px;
+    margin-top: 50px;
     font-weight:900;
     text-shadow: 1px 1px rgb(4, 114, 4);
+}
+#inv{
+    text-align: center;
+    position: relative;
+    font-weight:900;
+    text-shadow: 1px 1px rgb(4, 114, 4);
+    margin-top: 70px;
 }
 #teamcr{
     text-align: center;
@@ -75,6 +84,7 @@ h2{
     border: 5px solid black;
     box-shadow: 0 0 5px 5px rgb(92, 91, 91);
     cursor: pointer;
+    transition: 0.5s;
 }
 #teams{
     text-align: center;
@@ -89,6 +99,7 @@ h2{
     border: 5px solid black;
     box-shadow: 0 0 5px 5px rgb(92, 91, 91);
     cursor: pointer;
+    transition: 0.5s;
 }
 #about{
     text-align: center;
@@ -103,16 +114,81 @@ h2{
     border: 5px solid black;
     box-shadow: 0 0 5px 5px rgb(92, 91, 91);
     cursor: pointer;
-}
-#teams:hover{
     transition: 0.5s;
-    background-color: rgb(10, 163, 10);
 }
 #teamcr:hover{
+    color: rgb(4, 114, 4);
+    background-color: black;
+    text-shadow: 1px 1px 10px rgb(11, 209, 11);
     transition: 0.5s;
-    background-color: rgb(10, 163, 10);
+    border: 5px solid rgb(4, 114, 4);
+}
+#teams:hover{
+    color: rgb(4, 114, 4);
+    background-color: black;
+    text-shadow: 1px 1px 10px rgb(11, 209, 11);
+    transition: 0.5s;
+    border: 5px solid rgb(4, 114, 4);
 }
 #about:hover{
+    color: rgb(4, 114, 4);
+    background-color: black;
+    text-shadow: 1px 1px 10px rgb(11, 209, 11);
     transition: 0.5s;
-    background-color: rgb(10, 163, 10);
+    border: 5px solid rgb(4, 114, 4);
+}
+
+#invites{
+    width: 70%;
+    height: auto;
+    position: relative;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    background-color: rgb(231, 226, 226);
+    border: 3px solid black;
+    box-shadow: 0 0 5px 5px rgb(92, 91, 91);
+}
+.invite{
+    position: relative;
+    width: 70%;
+    height: 50px;
+    background-color: rgb(4, 114, 4);
+    color: black;
+    font-family: 'oswald',sans-serif;
+    font-weight: bolder;
+    font-size: x-large;
+    cursor: pointer;
+    border: 3px solid black;
+    text-shadow: 1px 1px 5px white;
+    transition: 0.5s;
+}
+.reject{
+    position: relative;
+    width: 30%;
+    height: 50px;
+    background-color: rgb(114, 11, 4);
+    color: black;
+    font-family: 'oswald',sans-serif;
+    font-weight: bolder;
+    font-size: x-large;
+    cursor: pointer;
+    transition: 0.5s;
+    border: 3px solid black;
+    text-shadow: 1px 1px 5px white;
+}
+.invite:hover{
+    color: rgb(4, 114, 4);
+    background-color: black;
+    text-shadow: 1px 1px 10px rgb(11, 209, 11);
+    transition: 0.5s;
+    border: 3px solid rgb(4, 114, 4);
+}
+.reject:hover{
+    color: black;
+    background-color: rgb(211, 16, 2);
+    text-shadow: 1px 1px 5px white;
+    transition: 0.5s;
+    border: 3px solid rgb(211, 16, 2);
 }

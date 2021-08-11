@@ -13,6 +13,29 @@ html
       button#dashboard DASHBOARD
       button#logout(onclick="location.href='/logout'") LOG OUT
     h2 WELCOME #{(user.name).toUpperCase()}!!
-    button#teamcr(onclick="location.href='/teamcr'") CREATE A TEAM
-    button#teams(onclick="location.href='/teams'") YOUR TEAMS
-    button#about(onclick="location.href='/about'") ABOUT THE SERVICE
+    button#teamcr(onclick="location.href='/homepage/teamcr'") CREATE A TEAM
+    button#teams(onclick="location.href='/homepage/teams'") YOUR TEAMS
+    button#about(onclick="location.href='/homepage/about'") ABOUT THE SERVICE
+    h2#inv INVITES
+    #invites
+      each val, index in  user.invites 
+        button(class = 'invite' ) #{user.invites[index].toUpperCase()}
+        button(class = 'reject' ) REJECT INVITE
+        br
+    script.
+      let invs = document.getElementsByClassName('invite');
+      for(let i=0;i<invs.length;i++)
+      {
+      let k= i+1;
+      invs[i].addEventListener("click",()=>{
+      location.href = '/homepage/accepted/'+k;
+      });
+      }
+      let rejs = document.getElementsByClassName('reject');
+      for(let i=0;i<rejs.length;i++)
+      {
+      let k= i+1;
+      rejs[i].addEventListener("click",()=>{
+      location.href = '/homepage/rejected/'+k;
+      });
+      }  

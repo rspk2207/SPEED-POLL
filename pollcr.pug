@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    meta(charset='uft-8')
+    title DELTA POLL
+    link(rel='stylesheet' href='../../../css/pollcr.css')
+    style.
+      @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+  body
+    #heading
+      h1 DELTA
+      button#home(onclick='location.href="/homepage"') HOMEPAGE
+    #query
+        h2 POLL CREATION 
+        form#form
+            label(for="nopoll") ENTER NUMBER OF OPTIONS:
+            br
+            input#nopoll(type="number" placeholder="NUMBER OF POLLS" name="nopoll")
+            br
+            button#nosub SUBMIT
+            br
+            br
+        form#nameopt(method='POST' action='/homepage/teams/'+(page).toUpperCase()) 
+            label(for="pollname") ENTER POLL NAME: 
+            br
+            input#pollname(type="text" placeholder='POLL NAME' name='pollname')
+            br
+            br
+    script.
+      let nosub = document.getElementById('nosub');
+      nosub.addEventListener("click",(e)=>{
+          e.preventDefault();
+      let options = document.getElementById('nopoll').value;
+      console.log(options);
+      document.getElementById('nameopt').style.display = "block";
+      for(let i=0;i<options;i++)
+      {
+      document.getElementById('nameopt').insertAdjacentHTML('beforeend','<label for="option"'+(i+1)+'>ENTER THE OPTION:</lable><br><input type="text" id="option"'+(i+1)+' name="option"'+(i+1)+'><br><br>');
+      }
+      document.getElementById('nameopt').insertAdjacentHTML('beforeend','<button id="postpoll" type="submit">POST POLL</button><br>');
+      });

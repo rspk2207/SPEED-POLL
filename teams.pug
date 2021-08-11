@@ -3,7 +3,7 @@ html
   head
     meta(charset='uft-8')
     title DELTA HOME
-    link(rel='stylesheet' href='css/teams.css')
+    link(rel='stylesheet' href='../css/teams.css')
     style.
       @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
@@ -12,3 +12,17 @@ html
       h1 DELTA
       button#dashboard DASHBOARD
       button#logout(onclick="location.href='/logout'") LOG OUT
+    h2 YOUR TEAMS
+    #display
+      each val, index in  user.teamnames 
+        button(class = 'teambuttons') #{user.teamnames[index].toUpperCase()}
+        br
+    script.
+      let names = document.getElementsByClassName('teambuttons');
+      for(let i=0;i<names.length;i++)
+      {
+      let k= names[i].textContent;
+      names[i].addEventListener("click",()=>{
+      location.href = '/homepage/teams/'+k;
+      });
+      } 
