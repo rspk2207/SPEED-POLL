@@ -130,11 +130,18 @@ await User.findById(req.user.id,(err,user)=>{
         console.log(err);
     }
     else
-    {
-        user.teamnames[count-1] = req.body.teamname;
-        (user.teams)++;
-        user.votes[count-1] = 0;
-        user.isAdmin[count-1] = true;
+    {   
+        let array = {tname: req.body.teamname};
+        /*
+        let pollarr = {question: "", options: 0,optvote:0};
+        */
+        user.teamnames.push(array);
+        /*
+        user.teamnames[user.teams].poll.push(pollarr); 
+        */
+       (user.teams)++;
+        user.votes.push(0);
+        user.isAdmin.push(true);
         user.markModified('teamnames');
         user.markModified('votes');
         user.markModified('isAdmin');
@@ -155,13 +162,86 @@ app.get('/homepage/teams/:k',loggedIn,(req,res)=>
     let index = req.params.k;
     for(let i=0;i<req.user.teamnames.length;i++)
     {
-    if(index === (req.user.teamnames[i]).toUpperCase())
+    if(index === (req.user.teamnames[i].tname).toUpperCase())
     {
         index = i;
         break;
     }
     }
-    res.render('teampage',{user: req.user, index: index,page: pagename})
+    let pollen = (req.user.teamnames[index].poll).length;
+    let os = JSON.stringify(req.user.teamnames[index].poll);
+    res.render('teampage',{user: req.user, index: index,page: pagename,poll: pollen, os: os})
+});
+app.post('/homepage/teams/:k',loggedIn, async (req,res)=>{
+    let index = req.params.k;
+    for(let i=0;i<req.user.teamnames.length;i++)
+    {
+    if(index === (req.user.teamnames[i].tname).toUpperCase())
+    {
+        index = i;
+        break;
+    }
+    }
+    /*
+    await User.findById(req.user.id,(err,user)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {   let counter = new Array;
+            let opt = new Array;
+            for(let k =0;k<(Object.keys(req.body.option).length);k++)
+            {
+                opt[k] = req.body.option[k];
+                counter[k] = 0;
+            }
+            let array = {question: req.body.question, options: opt, optvote: counter};
+            user.teamnames[index].poll.push(array);
+            user.markModified('teamnames');
+            user.save();
+            req.user = user.toObject();
+        }
+        console.log(user);
+    });
+    */
+    let counter = new Array;
+    let opt = new Array;
+    for(let k =0;k<(Object.keys(req.body.option).length);k++)
+    {
+        opt[k] = req.body.option[k];
+        counter[k] = 0;
+    }
+    console.log(opt,counter);
+    /*
+    let array = {poll: [{question: req.body.question, options: opt, optvote: counter}]};
+    await User.updateMany({tname: req.params.k},{"$push": array});
+    */
+    User.find({},(err,docs)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            for(let i=0;i<docs.length;i++)
+            {
+                let array = {question: req.body.question, options: opt, optvote: counter};
+                for(j=0;j<docs[i].teamnames.length;j++)
+                {
+                if(docs[i].teamnames[j].tname == (req.params.k).toLowerCase())
+                {
+                    docs[i].teamnames[j].poll.push(array);
+                    docs[i].markModified('teamnames');
+                    docs[i].save();
+                    console.log(docs[i])
+                    console.log(docs[i].teamnames[j].poll);
+                }
+                }
+            }
+        }
+    });
+    res.redirect('/homepage/teams/'+ req.params.k);
 });
 app.post('/homepage/teams/:k/invites',loggedIn,async (req,res)=>{
     let index = req.params.k;
@@ -205,16 +285,19 @@ app.get('/homepage/accepted/:i',loggedIn, async (req,res)=>{
                 res.redirect('/homepage');
             }    
             else
-            {
+            {   let lowername = (user.invites[count-1]).toLowerCase();
+                let array = {tname: lowername};
                 let invname = user.invites[count-1];
-                user.teamnames[user.teams] = user.invites[count-1];
+                user.teamnames.push(array);
                 user.invites.pull(invname);
                 (user.invcount)--;
-                user.votes[user.teams] = 0;
-                user.isAdmin[user.teams] = false;
+                user.votes.push(0);
+                user.isAdmin.push(false);
                 (user.teams)++; 
                 user.markModified('teamnames');
                 user.markModified('invites');
+                user.markModified('votes');
+                user.markModified('isAdmin');
                 user.save();
                 console.log(user);
                 req.user = user.toObject();
@@ -254,7 +337,17 @@ app.get('/homepage/rejected/:i',loggedIn,async (req,res)=>{
     });
 });
 app.get('/homepage/teams/:k/pollcr',(req,res)=>{
-    res.render('pollcr',{user: req.user,page: req.params.k});
+    for(let i=0;i<((req.user.teamnames).length);i++)
+    {
+        if(req.user.teamnames[i].tname == (req.params.k).toLowerCase())
+        {
+            if(req.user.isAdmin[i] == true)
+            res.render('pollcr',{user: req.user,page: req.params.k});
+            
+            else
+            res.redirect('/homepage/teams/'+req.params.k);
+        }
+    }
 })
 app.get('/homepage/about',loggedIn,(req,res)=>{
     res.render('about',{user: req.user});

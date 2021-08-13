@@ -15,7 +15,7 @@ html
     h2 YOUR TEAMS
     #display
       each val, index in  user.teamnames 
-        button(class = 'teambuttons') #{user.teamnames[index].toUpperCase()}
+        button(class = 'teambuttons') #{user.teamnames[index].tname.toUpperCase()}
         br
     script.
       let names = document.getElementsByClassName('teambuttons');

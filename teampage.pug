@@ -14,15 +14,41 @@ html
       button#logout(onclick="location.href='/logout'") LOG OUT
     h2 WELCOME TO #{page}
     #taskbar
-        form#invite(action="/homepage/teams/"+(user.teamnames[index]).toUpperCase()+'/invites', method="POST")
+        form#invite(action="/homepage/teams/"+(user.teamnames[index].tname).toUpperCase()+'/invites', method="POST")
             label(for="inv") INVITE:
             input#inv(type="text" placeholder="ENTER USERNAME TO INVITE" name="inv")
             button#in INVITE USER
         button#pollcr CREATE POLL
-    #polls
+    #poll(class='polls')
     script.
+        let index = "#{index}";
+        console.log(index);
         let pollcr = document.getElementById('pollcr');
         let page = "#{page}";
         pollcr.addEventListener("click",()=>{
-            location.href = '/homepage/teams/'+page +'/pollcr';
-        }); 
+        location.href = '/homepage/teams/'+page+'/pollcr';});
+    script.
+        let count = "#{poll}";
+        let os = `#{os}`
+        if(parseInt(count)>0)
+        {
+        console.log(typeof(count));
+        console.log(os);
+        let so = JSON.parse(os.replace(/(&quot\;)/g,'\"'));   
+        console.log(so[0].question);
+        if(count>0)
+        {
+        for(let i=parseInt(count);i>0;i--)
+        {
+            console.log(i);
+            let sub = so[i-1];
+        document.getElementById("poll").insertAdjacentHTML("beforeend",'<form action="/homepage/teams" method="POST" id="pollno'+(i+1)+'"><p>'+(sub.question)+'</p><br><br>');
+        for(let j=0;j<(sub.options).length;j++)
+        {
+        document.getElementById("poll").insertAdjacentHTML("beforeend",'<input type="radio" id="'+(i+1)+''+(j+1)+'" value="'+(j+1)+'"><label for="'+(i+1)+''+(j+1)+'">'+(sub.options[j])+'</label><br>');
+        }
+        document.getElementById("poll").insertAdjacentHTML("beforeend",'<br><button class="submit">SUBMIT VOTE</button><br>');
+        }
+        console.log('pls');
+        }
+        }

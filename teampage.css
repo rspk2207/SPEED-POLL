@@ -142,7 +142,7 @@ label{
     background-color: rgb(155, 151, 151);
     transition: 0.5s;
 }
-#polls{
+#poll{
     position:relative;
     margin-right: auto;
     margin-top: 20px;
