@@ -60,18 +60,20 @@ h2{
     font-weight: bold;
 }
 #instructions{
-    position: absolute;
-    margin: auto;
-    overflow: auto;
-    top: 10%; left: 0; bottom: 0; right: 0;
-    width: 60%;
-    height: 75%;
-    background-color: rgb(4, 114, 4);
-    border: 5px solid black;
-    box-shadow: 0 0 5px 5px rgb(92, 91, 91);
-    color:  black;
+    position:relative;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-left: auto;
+    width: 70%;
+    min-height: 50px;
+    height: auto;
+    font-weight: bold;
+    border: 5px solid rgb(4, 114, 4);
+    box-shadow:0 0 5px 5px rgb(92, 91, 91);
     font-family: 'Oswald', sans-serif;
-    font-size: larger;
-    font-weight: bolder;
-    text-shadow: 1px 1px 5px gray; 
+    margin-bottom: 20px;
+    background-color: black;
+    color: rgb(4, 114, 4);
+    text-shadow: 1px 1px 20px rgb(11, 209, 11);
+    font-size: large; 
 }

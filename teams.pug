@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(charset='uft-8')
-    title DELTA HOME
+    title DELTA TEAMS
     link(rel='stylesheet' href='../css/teams.css')
     style.
       @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
@@ -10,8 +10,8 @@ html
   body
     #heading
       h1 DELTA
-      button#dashboard DASHBOARD
-      button#logout(onclick="location.href='/logout'") LOG OUT
+      button#dashboard(onclick="location.href='/homepage/dashboard'") DASHBOARD
+      button#homepage(onclick="location.href='/homepage'") HOME PAGE
     h2 YOUR TEAMS
     #display
       each val, index in  user.teamnames 

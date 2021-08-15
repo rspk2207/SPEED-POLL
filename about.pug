@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(charset='uft-8')
-    title DELTA HOME
+    title ABOUT US
     link(rel='stylesheet' href='../css/about.css')
     style.
       @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
@@ -10,5 +10,17 @@ html
   body
     #heading
       h1 DELTA
-      button#dashboard DASHBOARD
-      button#logout(onclick="location.href='/logout'") LOG OUT
+      button#dashboard(onclick="location.href='/homepage/dashboard'") DASHBOARD
+      button#homepage(onclick="location.href='/homepage'") HOME PAGE
+      h2 HOW DOES THIS SITE WORK
+      #about
+        p THE HOME PAGE IS THE MAIN PAGE, WHERE ACCESS TO VARIOUS TASKS CAN BE FOUND
+        p CREATE TEAM BUTTON CAN BE USED TO CREATE A TEAM
+        p AFTER YOU CREATED A TEAM, YOU CAN ACCESS THE TEAM , AS A ADMIN, THROUGH THE YOUR TEAMS BUTTON 
+        p AFTER GOING INTO YOUR TEAM, YOU CAN INVITE OTHER MEMBERS (ONLY REGISTERED USERS) AND CREATE POLLS 
+        p ONLY THE ADMIN HAS THE AUTHORITY TO CREATE AND END POLLS 
+        p BE CAREFUL WHILE CREATING POLLS, MAKE SURE ALL MEMBERS ARE ADDED, BECAUSE ONLY THOSE WHO WERE ADDED BEFORE THE CREATION OF POLL, CAN HAVE ACCESS TO THE POLL 
+        p TO CAST YOUR VOTE IN THE POLL, JUST CLICK ON THE OPTION BUTTON THAT YOU WANT TO CHOOSE
+        p INVITES WILL BE VISIBLE IN THE HOMEPAGE, YOU CAN EITHER ACCEPT OR REJECT THEM 
+        p DASHBOARD CONTAINS YOUR PERSONAL DETAILS
+        p TEAM DASHBOARD CONTAINS LIST OF ALL MEMBERS BELONGING TO THE PARTICULAR TEAM 

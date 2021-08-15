@@ -5,7 +5,6 @@ body{
     background-size: cover;
     */
     margin:0;
-    font-family: 'Oswald', sans-serif;
 }
 #heading{
     padding-left: 5px;
@@ -27,44 +26,26 @@ h1{
     float: right;
     width: 100px;
     height: 50px;
-    margin-right: 10px;
+    margin-right: 40px;
     border: 5px solid black;
     color: black;
     font-weight: bold;
     font-family: 'Palette Mosaic', cursive;
     cursor: pointer;
+    transition: 0.5s;
 }
 #homepage:hover{
     background-color: rgb(155, 151, 151);
     transition: 0.5s;
 }
-#dashboard{
-    position: relative;
-    margin-top: -67px;
-    float: right;
-    width: 100px;
-    height: 50px;
-    margin-right: 130px;
-    border: 5px solid black;
-    color: black;
-    font-weight: bold;
-    font-family: 'Palette Mosaic', cursive;
-    cursor: pointer;
-}
-#dashboard:hover{
-    background-color: rgb(155, 151, 151);
-    transition: 0.5s;
-}
-h2
-{
-    text-align: center;
-    position: relative;
-    margin-top: 50px;
+h2{
     font-family: 'Oswald', sans-serif;
-    font-weight:900;
+    text-align: center;
+    font-weight: bold;
     text-shadow: 1px 1px rgb(4, 114, 4);
+    margin-top: 30px;
 }
-#about{
+#details{
     position:relative;
     margin-right: auto;
     margin-top: 50px;
@@ -80,11 +61,10 @@ h2
     background-color: black;
     color: rgb(4, 114, 4);
     text-shadow: 1px 1px 20px rgb(11, 209, 11);
-    font-size: large;
+    font-size: large; 
 }
 p{
-    position: relative;
-    font-family: 'Oswald', sans-serif;
-    font-weight:800;
     margin-left: 10px;
+    font-weight: bold;
+    font-size: large;
 }

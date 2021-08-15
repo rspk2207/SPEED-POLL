@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    meta(charset='uft-8')
+    title TEAM DASHBOARD
+    link(rel='stylesheet' href='../../../css/teamdashboard.css')
+    style.
+      @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+  body
+    #heading
+      h1 DELTA
+      button#team(onclick="location.href='/homepage/teams'") BACK TO TEAMS
+    h2 MEMBERS OF #{index}
+    #member
+        each val, index in members 
+            p= val

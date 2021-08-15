@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(charset='uft-8')
-    title DELTA HOME
+    title DELTA TEAM PAGE
     link(rel='stylesheet' href='../../css/teampage.css')
     style.
       @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
@@ -10,8 +10,7 @@ html
   body
     #heading
       h1 DELTA
-      button#dashboard DASHBOARD
-      button#logout(onclick="location.href='/logout'") LOG OUT
+      button#homepage(onclick="location.href='/homepage'") HOME PAGE
     h2 WELCOME TO #{page}
     #taskbar
         form#invite(action="/homepage/teams/"+(user.teamnames[index].tname).toUpperCase()+'/invites', method="POST")
@@ -20,6 +19,7 @@ html
             button#in INVITE USER
         button#pollcr CREATE POLL
     #poll(class='polls')
+        h2 POLLS
     script.
         let index = "#{index}";
         console.log(index);
@@ -29,26 +29,44 @@ html
         location.href = '/homepage/teams/'+page+'/pollcr';});
     script.
         let count = "#{poll}";
-        let os = `#{os}`
+        let os = `#{os}`;
+        let name = "#{page}";
+        let admin = "#{admin}";
         if(parseInt(count)>0)
         {
         console.log(typeof(count));
         console.log(os);
         let so = JSON.parse(os.replace(/(&quot\;)/g,'\"'));   
         console.log(so[0].question);
-        if(count>0)
-        {
         for(let i=parseInt(count);i>0;i--)
         {
             console.log(i);
             let sub = so[i-1];
-        document.getElementById("poll").insertAdjacentHTML("beforeend",'<form action="/homepage/teams" method="POST" id="pollno'+(i+1)+'"><p>'+(sub.question)+'</p><br><br>');
+        document.getElementById("poll").insertAdjacentHTML("beforeend",'<form action="/homepage/teams/'+(name)+'/submitpoll" method="POST" id="pollno'+(i)+'" class="formsub"><br><p>'+((sub.question).toUpperCase())+'</p><br><br>');
+        if(sub.stop == 0)
+        {
         for(let j=0;j<(sub.options).length;j++)
         {
-        document.getElementById("poll").insertAdjacentHTML("beforeend",'<input type="radio" id="'+(i+1)+''+(j+1)+'" value="'+(j+1)+'"><label for="'+(i+1)+''+(j+1)+'">'+(sub.options[j])+'</label><br>');
+        document.getElementById("poll").insertAdjacentHTML("beforeend",'<button type="submit" class="but" name="formbut" id="f'+(10*(i)+j+1)+'" value="'+(10*(i)+j+1)+'" form="pollno'+(i)+'">'+((sub.options[j]).toUpperCase())+'</button><br>');
         }
-        document.getElementById("poll").insertAdjacentHTML("beforeend",'<br><button class="submit">SUBMIT VOTE</button><br>');
+        document.getElementById("poll").insertAdjacentHTML("beforeend",'<button type="submit" name="formbut" value="'+(10*i)+'" class="endpoll" id="end'+(i)+'" form="pollno'+(i)+'">END POLL</button></form><br>');
+        console.log('end'+i);
         }
-        console.log('pls');
+        else
+        {
+            let vote= 0;
+            let max = sub.optvote[0];
+            let location = 0;
+            for(let j=0;j<(sub.options).length;j++)
+            {
+                vote+= sub.optvote[j];
+                if(sub.optvote[j]>max)
+                {
+                    max = sub.optvote[j];
+                    location = j;
+                }
+            }
+            document.getElementById('pollno'+(i)).innerHTML = "<p>QUESTION : "+((sub.question).toUpperCase())+"</p><br><p>TOTAL VOTES : "+vote+"</p><br><p>MOST CHOSEN OPTION : "+((sub.options[location]).toUpperCase())+", WITH "+max+" VOTES</p><br>";
+        }
         }
         }

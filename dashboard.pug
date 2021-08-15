@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta(charset='uft-8')
+    title DASHBOARD
+    link(rel='stylesheet' href='../css/dashboard.css')
+    style.
+      @import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+  body
+    #heading
+      h1 DELTA
+      button#homepage(onclick="location.href='/homepage'") HOME PAGE
+      h2 WELCOME TO DASHBOARD
+      #details
+        p NAME : #{user.name}
+        p USERNAME : #{user.username}
+        p DATE OF BIRTH : #{user.dob}
+        p PHONE NUMBER : #{user.phno}
+        p MAIL ID : #{user.mail}
+        p NUMBER OF TEAMS : #{user.teams}

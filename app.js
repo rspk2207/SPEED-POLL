@@ -54,6 +54,7 @@ app.post('/registration',async (req,res) =>{
     if(!rname || !rusername || !rdob || !rphno || !rmail || !rpassword)
     {
         errors.push({msg: 'please fill in all fields'});
+        res.redirect('/registration');
     }
     if(errors.length>0)
     {
@@ -128,6 +129,7 @@ await User.findById(req.user.id,(err,user)=>{
     if(err)
     {
         console.log(err);
+        res.redirect('/homepage/teamcr');
     }
     else
     {   
@@ -140,10 +142,8 @@ await User.findById(req.user.id,(err,user)=>{
         user.teamnames[user.teams].poll.push(pollarr); 
         */
        (user.teams)++;
-        user.votes.push(0);
         user.isAdmin.push(true);
         user.markModified('teamnames');
-        user.markModified('votes');
         user.markModified('isAdmin');
         user.save();
         req.user = user.toObject();
@@ -155,6 +155,76 @@ await User.findById(req.user.id,(err,user)=>{
 });
 app.get('/homepage/teams',loggedIn,(req,res)=>{
     res.render('teams',{user: req.user});
+});
+app.post('/homepage/teams/:k/submitpoll',loggedIn,(req,res)=>{
+    let value = parseInt(req.body.formbut);
+    let numberoption = value%10;
+    let numberpoll = (value-numberoption)/10;
+    console.log(req.body,numberpoll);
+    let team = (req.params.k).toLowerCase();
+    let pos;
+    for(let l=0;l<(req.user.teamnames).length;l++)
+    {
+        if(req.user.teamnames[l].tname == team)
+        {
+            pos = l;
+        }
+    }
+    User.find({},(err,docs)=>{
+        if(err)
+        {
+            console.log(err);
+            res.redirect('/homepage/teams/'+req.params.k);
+        }
+        else
+        {
+            for(let i=0;i<docs.length;i++)
+            {
+                for(j=0;j<docs[i].teamnames.length;j++)
+                {
+                if(docs[i].teamnames[j].tname == team)
+                {
+                    if(numberoption!=0)
+                    {
+                        console.log(req.user.teamnames[pos].poll[numberpoll-1].votes);
+                    if((docs[i].isAdmin[j] == true)&&((req.user.teamnames[pos].poll[numberpoll-1].votes)<1))
+                    {
+                        console.log(docs[i].teamnames[j].poll[numberpoll-1].optvote[numberoption-1]);
+                        (docs[i].teamnames[j].poll[numberpoll-1].optvote[numberoption-1])++;
+                        if(req.user.username == docs[i].username)
+                        {
+                            docs[i].teamnames[pos].poll[numberpoll-1].votes =1;                            
+                        }
+                        docs[i].markModified('teamnames');
+                        docs[i].save();
+                        console.log(docs[i]);
+                        console.log(docs[i].teamnames[j].poll);
+                        console.log(req.user.teamnames[pos].poll[numberpoll-1].votes);
+                    }
+                    if(req.user.username != docs[i].username)
+                    {
+                    req.user.teamnames[pos].poll[numberpoll-1].votes =1;
+                    req.user.markModified('teamnames');
+                    req.user.save();
+                    }
+                    }
+                    else
+                    {
+                        if(req.user.isAdmin[pos] == true)
+                        {
+                        
+                        docs[i].teamnames[j].poll[numberpoll-1].stop = 1;
+                        docs[i].markModified('teamnames');
+                        docs[i].save();
+                        console.log(docs[i].teamnames[j].poll[numberpoll-1].stop);
+                        }
+                    }
+                }
+                }
+            }
+        }
+    });
+    res.redirect('/homepage/teams');
 });
 app.get('/homepage/teams/:k',loggedIn,(req,res)=>
 {   
@@ -169,8 +239,9 @@ app.get('/homepage/teams/:k',loggedIn,(req,res)=>
     }
     }
     let pollen = (req.user.teamnames[index].poll).length;
+    let admin = req.user.isAdmin[index];
     let os = JSON.stringify(req.user.teamnames[index].poll);
-    res.render('teampage',{user: req.user, index: index,page: pagename,poll: pollen, os: os})
+    res.render('teampage',{user: req.user, index: index,page: pagename,poll: pollen,admin: admin, os: os})
 });
 app.post('/homepage/teams/:k',loggedIn, async (req,res)=>{
     let index = req.params.k;
@@ -221,12 +292,13 @@ app.post('/homepage/teams/:k',loggedIn, async (req,res)=>{
         if(err)
         {
             console.log(err);
+            res.redirect('/homepage/teams')
         }
         else
         {
             for(let i=0;i<docs.length;i++)
             {
-                let array = {question: req.body.question, options: opt, optvote: counter};
+                let array = {question: req.body.question, options: opt, optvote: counter, votes: 0, stop: 0};
                 for(j=0;j<docs[i].teamnames.length;j++)
                 {
                 if(docs[i].teamnames[j].tname == (req.params.k).toLowerCase())
@@ -251,6 +323,7 @@ app.post('/homepage/teams/:k/invites',loggedIn,async (req,res)=>{
         if(err)
         {
             console.log(err);
+            res.redirect('/homepage/teams/'+req.params.k);
         }
         else
         {
@@ -276,6 +349,7 @@ app.get('/homepage/accepted/:i',loggedIn, async (req,res)=>{
         if(err)
         {
             console.log(err);
+            res.redirect('/homepage/teams');
         }
         else
         {
@@ -291,12 +365,10 @@ app.get('/homepage/accepted/:i',loggedIn, async (req,res)=>{
                 user.teamnames.push(array);
                 user.invites.pull(invname);
                 (user.invcount)--;
-                user.votes.push(0);
                 user.isAdmin.push(false);
                 (user.teams)++; 
                 user.markModified('teamnames');
                 user.markModified('invites');
-                user.markModified('votes');
                 user.markModified('isAdmin');
                 user.save();
                 console.log(user);
@@ -352,6 +424,39 @@ app.get('/homepage/teams/:k/pollcr',(req,res)=>{
 app.get('/homepage/about',loggedIn,(req,res)=>{
     res.render('about',{user: req.user});
 });
+app.get('/homepage/dashboard',loggedIn,(req,res)=>{
+    res.render('dashboard',{user:req.user});
+});
+/*
+app.get('/homepage/teams/:k/teamdashboard',loggedIn,async (req,res)=>{
+    let index = (req.params.k);
+    let name = index.toLowerCase();
+    console.log(name);
+    let array = new Array;
+    await User.find({},(err,docs)=>{
+        if(err)
+        {
+            console.log(err);
+            res.redirect('/homepage/teams/'+req.params.k);
+        }
+        else
+        {
+            for(let i=0;i<docs.length;i++)
+            {
+                for(let j=0;j<(docs[i].teamnames).length;j++)
+                {
+                    if(docs[i].teamnames[j].tname == name)
+                    {    
+                        array.push(docs[i].username);
+                    }
+                }
+            }
+        }
+    });
+    console.log(array);
+    res.render('teamdashboard',{user: req.user, index: index, members: array});
+});
+*/
 app.listen(3000, () => {
     console.log('started on port 3000');
 });
